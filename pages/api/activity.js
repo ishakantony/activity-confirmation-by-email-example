@@ -29,16 +29,11 @@ export default async (req, res) => {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from:
-      '"Activity Support" <noreply@activity-confirmation-by-email-example.ishakantony.com>', // sender address
+    from: '"Activity Support" <noreply@email-confirmation.app.ishakantony.com>', // sender address
     to: 'you@example.com', // list of receivers
     subject: 'Confirmation to Convert Opportunity into Project', // Subject line
-    text: `To approve the action of converting opportunity ${title}, visit ${
-      process.env.CONFIRMATION_PATH || 'http://localhost:3000/confirm'
-    }/${encrypted.iv}.${encrypted.content}`, // plain text body
-    html: `<b>To approve the action of converting opportunity ${title}, visit <a href="${
-      process.env.CONFIRMATION_PATH || 'http://localhost:3000/confirm'
-    }/${encrypted.iv}.${encrypted.content}" target="_blank">here</a></b>`, // html body
+    text: `To approve the action of converting opportunity ${title}, visit ${process.env.HOST}/confirm/${encrypted.iv}.${encrypted.content}`, // plain text body
+    html: `<b>To approve the action of converting opportunity ${title}, visit <a href="${process.env.HOST}/confirm/${encrypted.iv}.${encrypted.content}" target="_blank">here</a></b>`, // html body
   })
 
   console.log('Message sent: %s', info.messageId)
